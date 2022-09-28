@@ -24,15 +24,15 @@ public class SoundManager
 
     class Data
     {
-        public string _key;
-        public string _name;
-        public AudioClip _clip;
+        public string key;
+        public string name;
+        public AudioClip clip;
 
         public Data(string key, string res)
         {
-            _key = key;
-            _name = "Sounds/" + res;
-            _clip = Resources.Load(_name) as AudioClip;
+            this.key = key;
+            name = "Sounds/" + res;
+            clip = Resources.Load<AudioClip>(name);
         }
     }
 
@@ -94,7 +94,7 @@ public class SoundManager
         var _data = bgm[key];
         var source = GetAudioSource(SoundType.BGM);
         source.loop = true;
-        source.clip = _data._clip;
+        source.clip = _data.clip;
         source.Play();
         return true;
     }
@@ -116,13 +116,13 @@ public class SoundManager
         if (0 <= ch && ch < _seCh)
         {
             var source = GetAudioSource(SoundType.SE, ch);
-            source.clip = _data._clip;
+            source.clip = _data.clip;
             source.Play();
         }
         else
         {
             var source = GetAudioSource(SoundType.SE);
-            source.PlayOneShot(_data._clip);
+            source.PlayOneShot(_data.clip);
         }
 
         return true;
@@ -136,7 +136,7 @@ public class SoundManager
         var _data = me[key];
         var source = GetAudioSource(SoundType.ME);
         source.loop = false;
-        source.clip = _data._clip;
+        source.clip = _data.clip;
         source.Play();
         return true;
     }
