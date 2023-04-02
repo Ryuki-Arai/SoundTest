@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class SoundControrler : MonoBehaviour
 {
-    void Start()
-    {
-        
-    }
+
+    [SerializeField]
+    SoundData[] _data;
+
+
 }
