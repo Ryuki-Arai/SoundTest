@@ -7,4 +7,6 @@ public class SoundData
     public string name;
     public SoundType type;
     public AudioClip clip;
+    public int volume;
+    public bool isLoop;
 }
