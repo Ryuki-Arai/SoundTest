@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SoundManager : MonoBehaviour
@@ -64,7 +61,7 @@ public class SoundManager : MonoBehaviour
         //ループしない場合、音声終了後に削除
         if (!soundData.isLoop)
         {
-            Destroy(audioSource, soundData.clip.length);
+            Destroy(soundPlayer, soundData.clip.length);
         }
     }
 }
