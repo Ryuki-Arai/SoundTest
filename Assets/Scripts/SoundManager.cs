@@ -13,27 +13,39 @@ public class SoundManager : MonoBehaviour
     public void CallSound(string soundName)
     {
         //指定された名前の音声データをデータ配列からインデックスを取得、無い場合はそのまま終了
-        int index = Array.IndexOf(_soundsData, soundName);
-        if (index < 0)
+        var soundData = GetSoundData(soundName);
+        if (soundData == null)
         {
             Debug.LogError("サウンドがありません");
             return;
         }
 
-        switch (_soundsData[index].type)
+        switch (soundData.type)
         {
             case SoundType.BGM:
                 if (_playingBGM)
                 {
                     Destroy(_playingBGM);
                 }
-                SoundPlay(_soundsData[index]);
+                SoundPlay(soundData);
                 break;
             case SoundType.ME:
             case SoundType.SE:
-                SoundPlay(_soundsData[index]);
+                SoundPlay(soundData);
                 break;
         }
+    }
+
+    SoundData GetSoundData(string soundName)
+    {
+        for(int i = 0; i < _soundsData.Length; i++)
+        {
+            if (_soundsData[i].name == soundName)
+            {
+                return _soundsData[i];
+            }
+        }
+        return null;
     }
 
     void SoundPlay(SoundData soundData)
