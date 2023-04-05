@@ -9,7 +9,7 @@ public class SoundManager : MonoBehaviour
 
     public void CallSound(string soundName)
     {
-        //指定された名前の音声データをデータ配列からインデックスを取得、無い場合はそのまま終了
+        //指定された名前の音声データをデータ配列から取得、無い場合はそのまま終了
         var soundData = GetSoundData(soundName);
         if (soundData == null)
         {
@@ -49,19 +49,19 @@ public class SoundManager : MonoBehaviour
     {
 
         //オブジェクト生成＆データ初期化
-        var soundPlayer = new GameObject(soundData.clip.name);
-        AudioSource audioSource = soundPlayer.AddComponent<AudioSource>();
+        var soundObj = new GameObject(soundData.name);
+        AudioSource audioSource = soundObj.AddComponent<AudioSource>();
 
         audioSource.clip = soundData.clip;
         audioSource.volume = soundData.volume;
         audioSource.loop = soundData.isLoop;
         audioSource.Play();
-        _playingBGM = soundPlayer;
+        if(soundData.type == SoundType.BGM) _playingBGM = soundObj;
 
         //ループしない場合、音声終了後に削除
         if (!soundData.isLoop)
         {
-            Destroy(soundPlayer, soundData.clip.length);
+            Destroy(soundObj, soundData.clip.length);
         }
     }
 }
