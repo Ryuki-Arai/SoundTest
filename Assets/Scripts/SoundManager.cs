@@ -33,6 +33,11 @@ public class SoundManager : MonoBehaviour
         }
     }
 
+    public void StopBGM()
+    {
+        Destroy(_playingBGM);
+    }
+
     SoundData GetSoundData(string soundName)
     {
         for(int i = 0; i < _soundsData.Length; i++)
