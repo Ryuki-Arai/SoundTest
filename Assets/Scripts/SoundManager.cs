@@ -17,7 +17,7 @@ public class SoundManager : MonoBehaviour
             return;
         }
 
-        switch (soundData.type)
+        switch (soundData.Type)
         {
             case SoundType.BGM:
                 if (_playingBGM)
@@ -42,7 +42,7 @@ public class SoundManager : MonoBehaviour
     {
         for(int i = 0; i < _soundsData.Length; i++)
         {
-            if (_soundsData[i].name == soundName)
+            if (_soundsData[i].Name == soundName)
             {
                 return _soundsData[i];
             }
@@ -54,19 +54,19 @@ public class SoundManager : MonoBehaviour
     {
 
         //オブジェクト生成＆データ初期化
-        var soundObj = new GameObject(soundData.name);
+        var soundObj = new GameObject(soundData.Name);
         AudioSource audioSource = soundObj.AddComponent<AudioSource>();
 
-        audioSource.clip = soundData.clip;
-        audioSource.volume = soundData.volume;
-        audioSource.loop = soundData.isLoop;
+        audioSource.clip = soundData.Clip;
+        audioSource.volume = soundData.Volume;
+        audioSource.loop = soundData.IsLoop;
         audioSource.Play();
-        if(soundData.type == SoundType.BGM) _playingBGM = soundObj;
+        if(soundData.Type == SoundType.BGM) _playingBGM = soundObj;
 
         //ループしない場合、音声終了後に削除
-        if (!soundData.isLoop)
+        if (!soundData.IsLoop)
         {
-            Destroy(soundObj, soundData.clip.length);
+            Destroy(soundObj, soundData.Clip.length);
         }
     }
 }
